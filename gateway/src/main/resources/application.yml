@@ -1,2 +1,10 @@
 server:
   port: 9000
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: member
+          predicates:
+            - Path=/member/**
+          uri: http://localhost:8888
