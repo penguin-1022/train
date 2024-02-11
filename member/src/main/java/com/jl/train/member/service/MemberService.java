@@ -1,6 +1,8 @@
 package com.jl.train.member.service;
 
 import cn.hutool.core.collection.CollUtil;
+import com.jl.train.common.exception.BusinessException;
+import com.jl.train.common.exception.BusinessExceptionEnum;
 import com.jl.train.member.domain.Member;
 import com.jl.train.member.domain.MemberExample;
 import com.jl.train.member.mapper.MemberMapper;
@@ -30,7 +32,7 @@ public class MemberService {
 //        返回的结果不是null，说明已经注册过了，那么报个错就结束了
         if (CollUtil.isNotEmpty(list)) {
 //            return list.get(0).getId();
-            throw new RuntimeException("手机号已经注册！");
+            throw new BusinessException(BusinessExceptionEnum.MEMBER_MOBILE_EXIST);
         }
 //        开始进行新用户创建，并写入到数据库中
         Member member = new Member();

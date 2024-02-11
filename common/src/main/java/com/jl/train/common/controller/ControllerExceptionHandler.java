@@ -1,5 +1,6 @@
 package com.jl.train.common.controller;
 
+import com.jl.train.common.exception.BusinessException;
 import com.jl.train.common.resp.CommonResp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ControllerExceptionHandler {
     private static final Logger LOG = LoggerFactory.getLogger(ControllerExceptionHandler.class);
 
-//    所有异常统一处理
+//    异常统一处理
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public CommonResp exceptionHandler(Exception e) {
@@ -26,15 +27,15 @@ public class ControllerExceptionHandler {
     }
 
 //    业务异常统一处理
-//    @ExceptionHandler(value = BusinessException.class)
-//    @ResponseBody
-//    public CommonResp exceptionHandler(BusinessException e){
-//        CommonResp commonResp = new CommonResp();
-//        LOG.error("系统异常：", e.getE().getDesc());
-//        commonResp.setSuccess(false);
-//        commonResp.setMessage(e.getE().getDesc());
-//        return commonResp;
-//    }
+    @ExceptionHandler(value = BusinessException.class)
+    @ResponseBody
+    public CommonResp exceptionHandler(BusinessException e){
+        CommonResp commonResp = new CommonResp();
+        LOG.error("系统异常：{}", e.getE().getDesc());
+        commonResp.setSuccess(false);
+        commonResp.setMessage(e.getE().getDesc());
+        return commonResp;
+    }
 
 //    校验异常统一处理
     @ExceptionHandler(value = BindException.class)
