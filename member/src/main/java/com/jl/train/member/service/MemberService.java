@@ -4,6 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import com.jl.train.member.domain.Member;
 import com.jl.train.member.domain.MemberExample;
 import com.jl.train.member.mapper.MemberMapper;
+import com.jl.train.member.req.MemberRegisterReq;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,8 @@ public class MemberService {
     }
 
 //    根据用户填写的手机号，实现新用户注册
-    public long register(String mobile) {
+    public long register(MemberRegisterReq memberRegisterReq) {
+        String mobile = memberRegisterReq.getMobile();
 //        先进行一下条件查询，判断是否已经注册过了
         MemberExample memberExample = new MemberExample();
         memberExample.createCriteria().andMobileEqualTo(mobile);
