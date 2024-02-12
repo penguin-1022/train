@@ -1,8 +1,10 @@
 package com.jl.train.member.controller;
 
 import com.jl.train.common.resp.CommonResp;
+import com.jl.train.member.req.MemberLoginReq;
 import com.jl.train.member.req.MemberRegisterReq;
 import com.jl.train.member.req.MemberSendCodeReq;
+import com.jl.train.member.resp.MemberLoginResp;
 import com.jl.train.member.service.MemberService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +42,11 @@ public class MemberController {
     public CommonResp sendCode(@Valid MemberSendCodeReq req) {
         memberService.sendCode(req);
         return new CommonResp();
+    }
+
+    @PostMapping("/login")
+    public CommonResp<MemberLoginResp> login(@Valid MemberLoginReq req) {
+        MemberLoginResp resp = memberService.login(req);
+        return new CommonResp<>(resp);
     }
 }
