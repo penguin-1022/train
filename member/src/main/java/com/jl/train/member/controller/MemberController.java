@@ -3,6 +3,7 @@ package com.jl.train.member.controller;
 import com.jl.train.common.resp.CommonResp;
 import com.jl.train.member.req.MemberRegisterReq;
 import com.jl.train.member.service.MemberService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +28,7 @@ public class MemberController {
 //    这个MemberRegisterReq，实际上是一个dto对象
 //    用dto是因为，对这样的一个注册功能，要用到表单
 //    如果我们每一项都逐个写在参数列表里面，太麻烦了，而且，可能有的参数，用户没填写
-    public CommonResp<Long> register(MemberRegisterReq memberRegisterReq) {
+    public CommonResp<Long> register(@Valid MemberRegisterReq memberRegisterReq) {
         CommonResp<Long> longCommonResp = new CommonResp<Long>();
         longCommonResp.setData(memberService.register(memberRegisterReq));
         return longCommonResp;

@@ -1,6 +1,7 @@
 package com.jl.train.member.service;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.IdUtil;
 import com.jl.train.common.exception.BusinessException;
 import com.jl.train.common.exception.BusinessExceptionEnum;
 import com.jl.train.member.domain.Member;
@@ -36,7 +37,7 @@ public class MemberService {
         }
 //        开始进行新用户创建，并写入到数据库中
         Member member = new Member();
-        member.setId(System.currentTimeMillis());
+        member.setId(IdUtil.getSnowflake(1, 1).nextId());
         member.setMobile(mobile);
         memberMapper.insert(member);
         return member.getId();
