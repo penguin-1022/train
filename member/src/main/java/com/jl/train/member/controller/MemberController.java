@@ -2,6 +2,7 @@ package com.jl.train.member.controller;
 
 import com.jl.train.common.resp.CommonResp;
 import com.jl.train.member.req.MemberRegisterReq;
+import com.jl.train.member.req.MemberSendCodeReq;
 import com.jl.train.member.service.MemberService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,12 @@ public class MemberController {
         CommonResp<Long> longCommonResp = new CommonResp<Long>();
         longCommonResp.setData(memberService.register(memberRegisterReq));
         return longCommonResp;
+    }
+
+//    请求验证码的接口
+    @PostMapping("/send-code")
+    public CommonResp sendCode(@Valid MemberSendCodeReq req) {
+        memberService.sendCode(req);
+        return new CommonResp();
     }
 }
