@@ -8,3 +8,12 @@ spring:
           predicates:
             - Path=/member/**
           uri: http://localhost:8888
+#          gateway层面跨域设置
+      globalcors:
+        cors-configurations:
+            '[/**]':
+              allowedOriginPatterns: "*"
+              allowedHeaders: "*"
+              allowedMethods: "*"
+              allowCredentials: true
+              maxAge: 3600

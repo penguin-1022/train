@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/member")
 public class MemberController {
     @Autowired
@@ -37,7 +36,7 @@ public class MemberController {
 
 //    请求验证码的接口
     @PostMapping("/send-code")
-    public CommonResp sendCode(@Valid MemberSendCodeReq req) {
+    public CommonResp sendCode(@Valid @RequestBody MemberSendCodeReq req) {
         memberService.sendCode(req);
         return new CommonResp();
     }
