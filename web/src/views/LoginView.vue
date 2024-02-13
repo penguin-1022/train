@@ -58,7 +58,7 @@ export default defineComponent({
     };
 
     const sendCode = () => {
-      axios.put("/member/member/send-code", {
+      axios.put("http://localhost:9001/member/member/send-code", {
         mobile: loginForm.mobile,
       }).then(response => {
         let data = response.data;
@@ -72,7 +72,7 @@ export default defineComponent({
     };
 
     const login = () => {
-      axios.put("/member/member/login", loginForm).then((response) => {
+      axios.put("http://localhost:9001/member/member/login", loginForm).then((response) => {
         let data = response.data;
         if (data.success) {
           notification.success({ description: '登录成功！' });
@@ -87,7 +87,8 @@ export default defineComponent({
     return {
       loginForm,
       sendCode,
-      login
+      login,
+      onFinish
     }
   }
 })
