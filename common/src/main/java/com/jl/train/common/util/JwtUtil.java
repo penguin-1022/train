@@ -12,7 +12,9 @@ import org.slf4j.LoggerFactory;
 import java.util.HashMap;
 import java.util.Map;
 
+//本项目中用于生成JWT的统一工具类
 public class JwtUtil {
+    // 配置Logger
     private static final Logger LOG = LoggerFactory.getLogger(JwtUtil.class);
 
 //    盐值（密钥），每个项目的都应该不一样
@@ -24,11 +26,16 @@ public class JwtUtil {
 //        多长时间后过期。这里，表示24小时后过期
         DateTime expTime = now.offsetNew(DateField.HOUR, 24);
         Map<String, Object> payload = new HashMap<>();
+//        签发时间
         payload.put(JWTPayload.ISSUED_AT, now);
+//        过期时间
         payload.put(JWTPayload.EXPIRES_AT, expTime);
+//        生效时间
         payload.put(JWTPayload.NOT_BEFORE, now);
+//        加入私有数据
         payload.put("id", id);
         payload.put("mobile", mobile);
+//        调用静态方法，生成token
         String token = JWTUtil.createToken(payload, key.getBytes());
         LOG.info("生成JWT: {}", token);
         return token;

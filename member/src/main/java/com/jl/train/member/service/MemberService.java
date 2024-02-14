@@ -89,7 +89,9 @@ public class MemberService {
         }
 
         MemberLoginResp memberLoginResp = BeanUtil.copyProperties(memberDB, MemberLoginResp.class);
+//        生成jwt，将id和mobile作为私有数据，添加到token中
         String token = JwtUtil.createToken(memberLoginResp.getId(), memberLoginResp.getMobile());
+//        将token添加到返回数据中，准备返回给客户端
         memberLoginResp.setToken(token);
         return memberLoginResp;
     }
