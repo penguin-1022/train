@@ -72,7 +72,7 @@ export default defineComponent({
         let data = response.data;
         if (data.success) {
           notification.success({ description: '登录成功！' });
-          router.push('/welcome');
+          router.push('/');
           store.commit("setMember", data.data);
         } else {
           notification.error({ description: data.message });
