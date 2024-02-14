@@ -1,6 +1,13 @@
 <template>
   <a-layout-header class="header">
     <div class="logo" />
+    <div style="float: right; color: white;">
+      您好：{{member.mobile}} &nbsp;&nbsp;
+<!--      使用router-link搭配to来跳转页面，相当于a标签搭配href-->
+      <router-link to="/login">
+        退出登录
+      </router-link>
+    </div>
     <a-menu
         v-model:selectedKeys="selectedKeys1"
         theme="dark"
@@ -16,13 +23,14 @@
 
 <script>
 import {defineComponent, ref} from "vue";
-
+import store from "@/store";
 export default defineComponent({
   name: "TheHeader",
   setup() {
-
+    let member = store.state.member
     return {
       selectedKeys1: ref(['2']),
+      member,
     }
   }
 })
