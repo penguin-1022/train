@@ -23,8 +23,8 @@ public class JwtUtil {
 //    创建token
     public static String createToken(Long id, String mobile) {
         DateTime now = DateTime.now();
-//        多长时间后过期。这里，表示24小时后过期
-        DateTime expTime = now.offsetNew(DateField.HOUR, 24);
+//        多长时间后过期。这里，表示1小时后过期
+        DateTime expTime = now.offsetNew(DateField.SECOND, 3600);
         Map<String, Object> payload = new HashMap<>();
 //        签发时间
         payload.put(JWTPayload.ISSUED_AT, now);
