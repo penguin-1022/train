@@ -17,6 +17,10 @@ const routes = [
       {
         path: 'welcome',
         component: () => import('../views/main/WelcomeView.vue'),
+      },
+      {
+        path: 'passenger',
+        component: () => import('../views/main/PassengerView.vue')
       }
     ]
   },
