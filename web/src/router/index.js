@@ -12,7 +12,18 @@ const routes = [
     component: () => import('../views/MainView.vue'),
     meta: {
       loginRequire: true,
-    }
+    },
+    children: [
+      {
+        path: 'welcome',
+        component: () => import('../views/main/WelcomeView.vue'),
+      }
+    ]
+  },
+  {
+    path: '',
+    // 发生重定向
+    redirect: '/welcome'
   }
 ]
 
