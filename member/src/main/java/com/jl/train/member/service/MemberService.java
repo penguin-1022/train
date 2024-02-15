@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.jl.train.common.exception.BusinessException;
 import com.jl.train.common.exception.BusinessExceptionEnum;
 import com.jl.train.common.util.JwtUtil;
@@ -75,16 +76,17 @@ public class MemberService {
     public MemberLoginResp login(MemberLoginReq req) {
         String mobile = req.getMobile();
         String code = req.getCode();
+//        制定筛选条件，并进行查询
         Member memberDB = selectByMobile(mobile);
 
-        if (ObjUtil.isNull(memberDB)) {
-            throw new BusinessException(BusinessExceptionEnum.MEMBER_MOBILE_EXIST);
+        if (ObjectUtil.isNull(memberDB)) { // 查不到，结果不存在，报错说手机号不存在
+            throw new BusinessException(BusinessExceptionEnum.MEMBER_MOBILE_NOT_EXIST);
         } else {
             LOG.info("手机号存在，不插入记录");
         }
 
 //        校验短信验证码
-        if (!"8888".equals(code)) {
+        if (!"8888".equals(code)) { // 验证码不正确，报错
             throw new BusinessException(BusinessExceptionEnum.MEMBER_MOBILE_CODE_ERROR);
         }
 
