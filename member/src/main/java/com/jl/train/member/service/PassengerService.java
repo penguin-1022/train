@@ -30,11 +30,15 @@ public class PassengerService {
     public void save(PassengerSaveReq req) {
         DateTime now = DateTime.now();
         Passenger passenger = BeanUtil.copyProperties(req, Passenger.class);
-        passenger.setMemberId(LoginMemberContext.getId());
-        passenger.setId(IdUtil.getSnowflake(1, 1).nextId());
-        passenger.setCreateTime(now);
-        passenger.setUpdateTime(now);
-        passengerMapper.insert(passenger);
+        if (ObjectUtil.isNull(passenger.getId())) { // 说明是按照新增后保存
+            passenger.setMemberId(LoginMemberContext.getId());
+            passenger.setId(IdUtil.getSnowflake(1, 1).nextId());
+            passenger.setCreateTime(now);
+            passenger.setUpdateTime(now);
+            passengerMapper.insert(passenger);
+        } else { // 说明是进行编辑后保存
+            passengerMapper.updateByPrimaryKey(passenger);
+        }
     }
 
     public PageResp<PassengerQueryResp> queryList(PassengerQueryReq req) {
