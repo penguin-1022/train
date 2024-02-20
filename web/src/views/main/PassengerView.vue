@@ -110,11 +110,13 @@ export default defineComponent({
     ];
 
     const onAdd = () => {
+      // 新增前要清空
       passenger.value = {};
       visible.value = true;
     };
 
     const onEdit = (record) => {
+      // 不会使得连锁修改
       passenger.value = window.Tool.copy(record);
       visible.value = true;
     }
